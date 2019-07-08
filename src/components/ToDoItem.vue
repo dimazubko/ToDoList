@@ -1,6 +1,12 @@
 <template>
     <li>
-        <input v-bind:id="index" type="checkbox" v-model="item.completed" v-on:change="changeValue">
+        <!-- <input type="checkbox" v-bind:checked="item.completed" v-on:change="changeValue"> -->
+        <!-- <input v-bind:id="index" type="checkbox" v-model="item.completed" v-on:change="changeValue"> -->
+
+<label class="container">
+  <input v-bind:id="index" type="checkbox" v-model="item.completed" v-on:change="changeValue">
+  <span class="checkmark"></span>
+</label>
                  
         <p v-bind:class="{done: item.completed}">
             <strong>Задача {{ index + 1 }}:</strong> {{ item.task }}
@@ -27,6 +33,7 @@
             {
                 let chbox = document.getElementById(this.index); // Костыль, но без него пропалала галочка с checkbox'a
                 chbox.checked = chbox.checked ? false : true;
+                // this.item.completed = !this.item.completed;
                 this.$emit('saveElem');                
             }
         }
@@ -42,12 +49,12 @@
         margin-bottom: 1rem;
     }
 
-    input
+    /*input
     {
         margin: 0;   
         width: 44px;
         height: 44px;     
-    }
+    }*/
 
     p 
     {
@@ -84,6 +91,81 @@
     .done
     {
         text-decoration: line-through;
+    }
+
+    /* Customize the label (the container) */
+    .container
+    {
+        display: block;
+        position: relative;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input
+    {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 44px;
+        width: 44px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark
+    {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark
+    {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after
+    {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after
+    {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after
+    {
+        left: 14px;
+        top: 3px;
+        width: 12px;
+        height: 24px;
+        border: solid white;
+        border-width: 0 6px 6px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 </style>
 

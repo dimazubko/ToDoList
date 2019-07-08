@@ -4,6 +4,7 @@
     <h1>{{ msg }}</h1>   
 
     <ToDoAdd v-on:addElem="addElement"/>
+    <hr>
 
     <div class="selectnbutton">
       <select v-model="filter">
@@ -59,9 +60,12 @@
     {       
       filteredList()
       {
-        if (this.filter === 'all') return this.list;
-        if (this.filter === 'completed') return this.list.filter(item => item.completed);
-        if (this.filter === 'not_completed') return this.list.filter(item => !item.completed);
+        switch(this.filter)
+        {
+          case 'completed': return this.list.filter(item => item.completed);
+          case 'not_completed': return this.list.filter(item => !item.completed);
+          default: return this.list;
+        }
       }
     },
     methods:
@@ -103,7 +107,7 @@
     width: 472px;
     height: 44px;
     display: inline-block;
-    margin-bottom: 30px;   
+    margin: 22px 0 30px 0;   
   }
 
   select

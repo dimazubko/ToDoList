@@ -1,16 +1,10 @@
 <template>
-    <div>
-        <table>
-            <tr>
-                <td><input type="text" placeholder="Задача" v-model="newItem.task"></td>
-                <td rowspan="2" v-on:click="add_elem"><button>Добавить</button></td>
-            </tr>
-
-            <tr>
-                <td><input type="text" placeholder="Время" v-model="newItem.time"></td>                  
-            </tr>
-        </table> 
-        <hr>
+    <div class="container">
+        <div class="inputs">
+            <input type="text" placeholder="Задача" v-model="newItem.task">
+            <input type="text" placeholder="Время" v-model="newItem.time">
+        </div>
+        <button v-on:click="add_elem">Добавить</button>
     </div>
 </template>
 
@@ -24,7 +18,14 @@ export default
     },
     data() //      data: function() { return { field: '' } }      data: () => { return { field: '' } }
     {
-        return { newItem: { task: '', time: '', completed: false } } 
+        return {            
+            newItem:            
+            {                 
+                task: '',
+                time: '',
+                completed: false    
+            }
+        };
     },
     methods:
     {
@@ -46,21 +47,14 @@ export default
     {
         font-size: 16px;
         padding: 12px 20px;    
-        width: 300px;
+        width: 306px;        
         border: 1px solid rgb(40, 167, 69); 
         border-radius: 6px;
-    }
-    
-    table
-    {
-        margin: 0;
-        padding: 0;
-        display: inline-block;
-        font-size: 16px;
     }
 
     button
     {     
+        margin-left: 4px;
         cursor: pointer;
         padding: 6px 12px;
         font-size: 16px;
@@ -81,9 +75,21 @@ export default
         color: rgb(255, 255, 255);
     }
 
-    div 
+    div.container
     {
-        margin-bottom: 30px;
+        display: flex;
+        width: 472px;
+        height: 96px;
+        margin: 0 auto 15px;
+    }
+
+    div.inputs
+    {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        width: 348px;
+        height: 96px;
     }
 </style>
 

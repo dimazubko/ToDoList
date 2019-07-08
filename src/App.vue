@@ -25,7 +25,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    border-radius: 5%;
+    border-radius: 20px;
     width: 720px;
     margin: 30px auto;
     padding: 15px;
